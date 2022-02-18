@@ -1,0 +1,18 @@
+.avatar{
+  width: 50px;
+  height: 50px;
+  border-radius: 30px;
+}
+
+.chat {
+  margin-bottom: 10px;
+  display: table;
+}
+
+.name {
+  padding-left: 10px;
+  color: #fff;
+  text-decoration: none;
+  display: table-cell;
+  vertical-align: middle;
+}
