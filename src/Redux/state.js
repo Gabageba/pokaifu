@@ -26,4 +26,15 @@ let state = {
   }
 }
 
+export let addPost = postMessage => {
+  let newPost = {
+    id: 5,
+    message: postMessage,
+    likesCount: 0,
+    avatar: 'https://i.pinimg.com/originals/b8/be/c7/b8bec7a821b32544097807f259a6057d.jpg'
+  }
+
+  state.profilePage.postsData.push(newPost)
+}
+
 export default state
