@@ -2,8 +2,10 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
 import App from './App'
-import {addPost} from './Redux/state'
+import {addPost, updateNewPostText} from './Redux/state'
 
 export let rerenderEntireTree = (state) => {
-  ReactDOM.render(<App state={state} addPost={addPost}/>, document.getElementById('root'))
+  ReactDOM.render(<App state={state}
+                       updateNewPostText={updateNewPostText}
+                       addPost={addPost}/>, document.getElementById('root'))
 }
