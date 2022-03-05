@@ -16,13 +16,13 @@ let state = {
         avatar: 'https://avatars.mds.yandex.net/i?id=a3863d37caad9303f87326aaac594681-5874987-images-thumbs&n=13&exp=1'
       },
       {
-        id: 1,
+        id: 3,
         message: 'Fuck you',
         likesCount: 100,
         avatar: 'https://i.mycdn.me/i?r=AzEPZsRbOZEKgBhR0XGMT1RkW6oS2kKn63RiJTxk6T6xGqaKTM5SRkZCeTgDn6uOyic&fn=sqr_288'
       },
       {
-        id: 1,
+        id: 4,
         message: 'Motherfucker',
         likesCount: 999,
         avatar: 'https://i.mycdn.me/i?r=AzEPZsRbOZEKgBhR0XGMT1RkW6oS2kKn63RiJTxk6T6xGqaKTM5SRkZCeTgDn6uOyic&fn=sqr_288'
@@ -38,6 +38,7 @@ let state = {
       {id: 4, message: 'Fuck?'},
       {id: 5, message: 'Fuck'}
     ],
+    newMessageText: 'hi',
     dialogsData: [
       {id: 1, name: 'Gabageba', avatar: 'https://i.pinimg.com/originals/b8/be/c7/b8bec7a821b32544097807f259a6057d.jpg'},
       {id: 2, name: 'Alexandr', avatar: 'https://www.meme-arsenal.com/memes/24ea176ff61da30ee142f0dbca6dcc90.jpg'},
@@ -75,6 +76,21 @@ export let addPost = () => {
 
 export let updateNewPostText = (newText) => {
   state.profilePage.newPostText = newText
+  rerenderEntireTree(state)
+}
+
+export let addMessage = () => {
+  let newMessage = {
+    id: 6,
+    message: state.messagesPage.newMessageText
+  }
+  state.messagesPage.messagesData.push(newMessage)
+  state.messagesPage.newMessageText = ''
+  rerenderEntireTree(state)
+}
+
+export let updateNewMessageText = (newText) => {
+  state.messagesPage.newMessageText = newText
   rerenderEntireTree(state)
 }
 
