@@ -39,7 +39,11 @@ let store = {
       ],
       newMessageText: 'hi',
       dialogsData: [
-        {id: 1, name: 'Gabageba', avatar: 'https://i.pinimg.com/originals/b8/be/c7/b8bec7a821b32544097807f259a6057d.jpg'},
+        {
+          id: 1,
+          name: 'Gabageba',
+          avatar: 'https://i.pinimg.com/originals/b8/be/c7/b8bec7a821b32544097807f259a6057d.jpg'
+        },
         {id: 2, name: 'Alexandr', avatar: 'https://www.meme-arsenal.com/memes/24ea176ff61da30ee142f0dbca6dcc90.jpg'},
         {
           id: 3,
@@ -60,42 +64,44 @@ let store = {
       ]
     }
   },
-  getState() {
-    return this._state
-  },
   _callSubscriber() {
     console.log('state was changed')
   },
-  addPost() {
-    let newPost = {
-      id: 5,
-      message: this._state.profilePage.newPostText,
-      likesCount: 0,
-      avatar: 'https://i.pinimg.com/originals/b8/be/c7/b8bec7a821b32544097807f259a6057d.jpg'
-    }
-    this._state.profilePage.postsData.push(newPost)
-    this._state.profilePage.newPostText = ''
-    this._callSubscriber(this._state)
+  getState() {
+    return this._state
   },
-  updateNewPostText(newText) {
-    this._state.profilePage.newPostText = newText
-    this._callSubscriber(this._state)
-  },
-  addMessage() {
-    let newMessage = {
-      id: 6,
-      message: this._state.messagesPage.newMessageText
-    }
-    this._state.messagesPage.messagesData.push(newMessage)
-    this._state.messagesPage.newMessageText = ''
-    this._callSubscriber(this._state)
-  },
-  updateNewMessageText(newText) {
-    this._state.messagesPage.newMessageText = newText
-    this._callSubscriber(this._state)
-  },
-  subscribe (observer) {
+  subscribe(observer) {
     this._callSubscriber = observer
+  },
+  dispatch(action) {
+    if (action.type === 'ADD-POST') {
+      let newPost = {
+        id: 5,
+        message: this._state.profilePage.newPostText,
+        likesCount: 0,
+        avatar: 'https://i.pinimg.com/originals/b8/be/c7/b8bec7a821b32544097807f259a6057d.jpg'
+      }
+      this._state.profilePage.postsData.push(newPost)
+      this._state.profilePage.newPostText = ''
+      this._callSubscriber(this._state)
+    }
+    else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+      this._state.profilePage.newPostText = action.newText
+      this._callSubscriber(this._state)
+    }
+    else if (action.type === 'ADD-MESSAGE') {
+      let newMessage = {
+        id: 6,
+        message: this._state.messagesPage.newMessageText
+      }
+      this._state.messagesPage.messagesData.push(newMessage)
+      this._state.messagesPage.newMessageText = ''
+      this._callSubscriber(this._state)
+    }
+    else if (action.type === 'UPDATE-NEW-MESSAGE-TEXT') {
+      this._state.messagesPage.newMessageText = action.newText
+      this._callSubscriber(this._state)
+    }
   }
 }
 
