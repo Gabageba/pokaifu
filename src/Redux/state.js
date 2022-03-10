@@ -1,8 +1,6 @@
-const ADD_POST = 'ADD-POST'
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
-const ADD_MESSAGE = 'ADD-MESSAGE'
-const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT'
-
+import profileReducer from './profileReducer';
+import sidebarReducer from './sidebarReducer';
+import messagesReducer from './messagesReducer';
 
 let store = {
   _state: {
@@ -33,7 +31,7 @@ let store = {
           avatar: 'https://i.mycdn.me/i?r=AzEPZsRbOZEKgBhR0XGMT1RkW6oS2kKn63RiJTxk6T6xGqaKTM5SRkZCeTgDn6uOyic&fn=sqr_288'
         }
       ],
-      newPostText: 'huina'
+      newPostText: ''
     },
     messagesPage: {
       messagesData: [
@@ -43,7 +41,6 @@ let store = {
         {id: 4, message: 'Fuck?'},
         {id: 5, message: 'Fuck'}
       ],
-      newMessageText: 'hi',
       dialogsData: [
         {
           id: 1,
@@ -67,8 +64,10 @@ let store = {
           name: 'Nikita',
           avatar: 'https://memepedia.ru/wp-content/uploads/2021/10/liza-oblozhka-alboma-hate-love.jpg'
         }
-      ]
-    }
+      ],
+      newMessageText: ''
+    },
+    sidebar: {}
   },
   _callSubscriber() {
     console.log('state was changed')
@@ -80,59 +79,15 @@ let store = {
     this._callSubscriber = observer
   },
   dispatch(action) {
-    if (action.type === ADD_POST) {
-      debugger
-      let newPost = {
-        id: 5,
-        message: this._state.profilePage.newPostText,
-        likesCount: 0,
-        avatar: 'https://i.pinimg.com/originals/b8/be/c7/b8bec7a821b32544097807f259a6057d.jpg'
-      }
-      this._state.profilePage.postsData.push(newPost)
-      this._state.profilePage.newPostText = ''
-      this._callSubscriber(this._state)
-    } else if (action.type === UPDATE_NEW_POST_TEXT) {
-      this._state.profilePage.newPostText = action.newText
-      this._callSubscriber(this._state)
-    } else if (action.type === ADD_MESSAGE) {
-      let newMessage = {
-        id: 6,
-        message: this._state.messagesPage.newMessageText
-      }
-      this._state.messagesPage.messagesData.push(newMessage)
-      this._state.messagesPage.newMessageText = ''
-      this._callSubscriber(this._state)
-    } else if (action.type === 'UPDATE-NEW-MESSAGE-TEXT') {
-      this._state.messagesPage.newMessageText = action.newText
-      this._callSubscriber(this._state)
-    }
+
+    this._state.profilePage = profileReducer(this._state.profilePage, action)
+    this._state.messagesPage = messagesReducer(this._state.messagesPage, action)
+    this._state.sidebar = sidebarReducer(this._state.sidebar, action)
+
+    this._callSubscriber(this._state)
+
   }
 }
 
-export const addPostActionCreator = () => {
-  return {
-    type: ADD_POST
-  }
-}
-
-export const updateNewPostTextActionCreator = (text) => {
-  return {
-    type: UPDATE_NEW_POST_TEXT,
-    newText: text
-  }
-}
-
-export const addMessageActionCreator = () => {
-  return {
-    type: ADD_MESSAGE
-  }
-}
-
-export const updateNewMessageTextActionCreator = (text) => {
-  return {
-    type: UPDATE_NEW_MESSAGE_TEXT,
-    newText: text
-  }
-}
 
 export default store
