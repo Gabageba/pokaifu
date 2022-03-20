@@ -4,9 +4,9 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
 import App from './App'
-import StoreContext, {Provider} from './storeContext';
+import {Provider} from 'react-redux';
 
-let rerenderEntireTree = (state) => {
+let rerenderEntireTree = () => {
   ReactDOM.render(
     <Provider store={store}>
       <App/>
