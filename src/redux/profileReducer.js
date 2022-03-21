@@ -45,12 +45,16 @@ const profileReducer = (state = initialState, action) => {
         avatar:
           'https://i.pinimg.com/originals/b8/be/c7/b8bec7a821b32544097807f259a6057d.jpg'
       }
-      state.postsData.push(newPost)
-      state.newPostText = ''
-      return state
+     return {
+        ...state,
+       newPostText: '',
+       postsData: [...state.postsData, newPost]
+     }
     case UPDATE_NEW_POST_TEXT:
-      state.newPostText = action.newText
-      return state
+      return {
+        ...state,
+        newPostText: action.newText
+      }
     default:
       return state
   }

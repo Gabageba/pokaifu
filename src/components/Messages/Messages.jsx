@@ -2,18 +2,17 @@ import React from 'react'
 import s from './Messages.module.css'
 import DialogItem from './DialogItem/DialogItem'
 import Message from './Message/Message'
-import {addMessageActionCreator, updateNewMessageTextActionCreator} from '../../redux/messagesReducer';
 
 const Messages = (props) => {
 
   let state = props.messagesPage
 
   let dialogsElements = state.dialogsData.map((d) => (
-    <DialogItem name={d.name} id={d.id} avatar={d.avatar}/>
+    <DialogItem key={d.id} name={d.name} id={d.id}  avatar={d.avatar}/>
   ))
 
   let messagesElements = state.messagesData.map((m) => (
-    <Message message={m.message}/>
+    <Message key={m.id} message={m.message}/>
   ))
 
   let onSendMessageClick = () => {
