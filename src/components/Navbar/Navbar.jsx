@@ -21,6 +21,9 @@ const Navbar = () => {
         <NavLink to="/news" className={SelectedLink()}>News</NavLink>
       </div>
       <div>
+        <NavLink to="/users" className={SelectedLink()}>Users</NavLink>
+      </div>
+      <div>
         <NavLink to="/music" className={SelectedLink()}>Music</NavLink>
       </div>
       <div>
