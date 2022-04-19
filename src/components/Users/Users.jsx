@@ -1,12 +1,13 @@
 import React from 'react';
 import style from './Users.module.css';
 import userPhoto from '../../assets/images/User.png';
+import Spinner from '../Spinner/Spinner';
 
 let Users = (props) => {
 
   let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
   let pages = []
-  for (let i = 0; i <= pagesCount - 1; i++) {
+  for (let i = 0; i <= 30; i++) {
     pages.push(i + 1)
   }
 
@@ -28,6 +29,7 @@ let Users = (props) => {
       {
         props.usersData.map(u =>
           <div key={u.id}>
+            <Spinner/>
             <span>
               <div>
                 <img className={style.userPhoto} src={u.photos.small != null ? u.photos.small : userPhoto}
